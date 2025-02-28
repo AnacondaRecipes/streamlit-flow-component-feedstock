@@ -1,6 +1,6 @@
 {% set python_min = python_min|default("3.8") %}
 {% set name = "streamlit-flow-component" %}
-{% set version = "1.5.0" %}
+{% set version = "1.6.1" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/streamlit-flow-component-{{ version }}.tar.gz
-  sha256: 0ef30389e7eecb577f6c3a7fc5217bd100a36b8910d00b9124e8bb9f36b630ff
+  sha256: 16998d94731f494358d3ce03a73795e127c39fcefa0662666f524bd017493388
 
 build:
   noarch: python
