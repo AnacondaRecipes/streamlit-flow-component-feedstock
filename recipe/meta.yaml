@@ -19,6 +19,7 @@ requirements:
     - python
     - pip
     - setuptools
+    - wheel
   run:
     - python
     - streamlit >=1.0.0
