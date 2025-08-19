@@ -31,6 +31,7 @@ test:
     - streamlit_flow
     - streamlit_flow.elements
     - streamlit_flow.state
+    - streamlit_flow.layouts
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
