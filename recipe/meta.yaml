@@ -1,4 +1,3 @@
-{% set python_min = python_min|default("3.8") %}
 {% set name = "streamlit-flow-component" %}
 {% set version = "1.6.1" %}
 
@@ -7,38 +6,52 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/streamlit-flow-component-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 16998d94731f494358d3ce03a73795e127c39fcefa0662666f524bd017493388
 
 build:
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: True  # [py<38]
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - pip
     - setuptools
+    - wheel
   run:
-    - python >={{ python_min }}
+    - python
     - streamlit >=1.0.0
 
 test:
+  files:
+    - tests
   imports:
     - streamlit_flow
+    - streamlit_flow.elements
+    - streamlit_flow.state
+    - streamlit_flow.layouts
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # llm testing
+    - pytest -v tests/llm_tests.py
   requires:
-    - python {{ python_min }}
     - pip
-    - streamlit >=1.0.0
+    - pytest
 
 about:
-  home: https://github.com/dkapur17/streamlit-flow
-  summary: Streamlit Component Wrapper for React Flow
+  home: https://stflow.streamlit.app
+  summary: Streamlit Flow is a library for creating and visualizing flow diagrams in Streamlit.
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  description: Streamlit Flow is a library for creating and visualizing flow diagrams in Streamlit.
+    Powered by ReactFlow, Streamlit Flow provides an extensive wrapper over ReactFlow while also adding
+    several quality of life features like Context Menus and a Layout Engine, all accessible through the simplicity of Streamlit.
+  doc_url: https://stflow.streamlit.app
+  dev_url: https://github.com/dkapur17/streamlit-flow
 
 extra:
   recipe-maintainers:
