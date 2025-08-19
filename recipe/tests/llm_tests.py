@@ -1,4 +1,3 @@
-import pytest
 import streamlit as st
 from streamlit_flow import StreamlitFlowNode, StreamlitFlowEdge, StreamlitFlowState
 from types import SimpleNamespace
